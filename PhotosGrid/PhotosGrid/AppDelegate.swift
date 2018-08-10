@@ -5,6 +5,7 @@
 //  Created by Jeffrey Ip on 2018-08-07.
 //  Copyright © 2018 nil. All rights reserved.
 //
+//  I've drawn heavily from 'iOS Programming: the Big Nerd Ranch Guide 6th ed.' Especially ch.20 (Web Services), and ch.21 (Collection Views)
 
 import UIKit
 

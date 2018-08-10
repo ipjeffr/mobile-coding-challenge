@@ -106,6 +106,5 @@ struct UnsplashAPI {
                      dateCreated: dateCreated,
                      remoteURLThumb: urlThumb,
                      remoteURLFull: urlFull)
-        
     }
 }

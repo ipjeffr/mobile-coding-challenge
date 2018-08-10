@@ -17,14 +17,96 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aOO-z7-A6P">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="6dn-5n-EOW">
+                                    <size key="itemSize" width="90" height="90"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="wOQ-8Q-CQT" customClass="PhotoCollectionViewCell" customModule="PhotosGrid" customModuleProvider="target">
+                                        <rect key="frame" x="2" y="2" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WRA-ir-w9q">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                </imageView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6Dk-62-CFC">
+                                                    <rect key="frame" x="35" y="35" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="6Dk-62-CFC" firstAttribute="centerX" secondItem="wOQ-8Q-CQT" secondAttribute="centerX" id="3gh-Fj-W6R"/>
+                                            <constraint firstItem="WRA-ir-w9q" firstAttribute="leading" secondItem="wOQ-8Q-CQT" secondAttribute="leading" id="50O-UW-lYb"/>
+                                            <constraint firstAttribute="bottom" secondItem="WRA-ir-w9q" secondAttribute="bottom" id="HZG-wK-8y3"/>
+                                            <constraint firstItem="6Dk-62-CFC" firstAttribute="centerY" secondItem="wOQ-8Q-CQT" secondAttribute="centerY" id="UGR-E3-XaG"/>
+                                            <constraint firstItem="WRA-ir-w9q" firstAttribute="top" secondItem="wOQ-8Q-CQT" secondAttribute="top" id="YYw-Ud-kJf"/>
+                                            <constraint firstAttribute="trailing" secondItem="WRA-ir-w9q" secondAttribute="trailing" id="ts9-KJ-let"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="WRA-ir-w9q" id="boJ-g8-Vky"/>
+                                            <outlet property="spinner" destination="6Dk-62-CFC" id="Apj-GK-MS2"/>
+                                            <segue destination="lc7-Kh-uoj" kind="show" identifier="showPhoto" id="1gq-x9-3gt"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aOO-z7-A6P" secondAttribute="trailing" id="Gdw-8n-Us5"/>
+                            <constraint firstItem="aOO-z7-A6P" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="UwL-68-jrb"/>
+                            <constraint firstItem="aOO-z7-A6P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eH9-4V-lUk"/>
+                            <constraint firstAttribute="bottom" secondItem="aOO-z7-A6P" secondAttribute="bottom" id="vCY-AM-OWz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Lu8-sr-NVc"/>
+                    <connections>
+                        <outlet property="collectionView" destination="aOO-z7-A6P" id="Yvt-cz-hUR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="948" y="-592"/>
+        </scene>
+        <!--Photo Info View Controller-->
+        <scene sceneID="hfe-Be-hNN">
+            <objects>
+                <viewController id="lc7-Kh-uoj" customClass="PhotoInfoViewController" customModule="PhotosGrid" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VNQ-SM-KmF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XAS-po-i0B">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="H9F-zq-dNb" firstAttribute="bottom" secondItem="XAS-po-i0B" secondAttribute="bottom" id="CU7-x3-obf"/>
+                            <constraint firstItem="H9F-zq-dNb" firstAttribute="trailing" secondItem="XAS-po-i0B" secondAttribute="trailing" id="f3d-sE-Ri6"/>
+                            <constraint firstItem="XAS-po-i0B" firstAttribute="top" secondItem="H9F-zq-dNb" secondAttribute="top" id="q3o-Fv-hbn"/>
+                            <constraint firstItem="XAS-po-i0B" firstAttribute="leading" secondItem="H9F-zq-dNb" secondAttribute="leading" id="wzm-Op-w59"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="H9F-zq-dNb"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="XAS-po-i0B" id="lWx-nk-VqC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o5a-Af-FVs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1777" y="-592"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BB0-h3-HWu">
