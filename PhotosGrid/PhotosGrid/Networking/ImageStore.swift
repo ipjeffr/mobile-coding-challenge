@@ -47,7 +47,6 @@ class ImageStore {
         } catch let deleteError {
             print("Error removing the image from disk: \(deleteError)")
         }
-        
     }
     
     func imageURL(forKey key: String) -> URL {

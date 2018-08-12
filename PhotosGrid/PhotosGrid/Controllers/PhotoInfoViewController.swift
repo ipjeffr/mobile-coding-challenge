@@ -17,18 +17,18 @@ class PhotoInfoViewController: UIViewController {
             navigationItem.title = photo.title
         }
     }
-    var store: PhotoStore!
+    var viewModel: PhotosViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        store.fetchImage(for: photo) { (result) -> Void in
-            switch result {
-            case let .success(image):
-                self.imageView.image = image
-            case let .failure(error):
-                print("Error fetching image for photo: \(error)")
-            }
-        }
+//        viewModel.fetchImage(for: photo) { (result) -> Void in
+//            switch result {
+//            case let .success(image):
+//                self.imageView.image = image
+//            case let .failure(error):
+//                print("Error fetching image for photo: \(error)")
+//            }
+//        }
     }
 }

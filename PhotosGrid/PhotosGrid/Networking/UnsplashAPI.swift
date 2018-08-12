@@ -13,7 +13,7 @@ enum UnsplashError: Error {
 }
 
 enum UnsplashAPIPath: String {
-    case photos = "/photos"
+    case photos = "/photos/curated"
 }
 
 struct UnsplashAPI {
@@ -26,8 +26,9 @@ struct UnsplashAPI {
         return formatter
     }()
     
-    static var photosURL: URL {
-        return unsplashURL(path: .photos, parameters: nil)
+    static func photosURL(page: Int) -> URL {
+        let pageParam = ["page": String(page)]
+        return unsplashURL(path: .photos, parameters: pageParam)
     }
     
     private static func unsplashURL(path: UnsplashAPIPath,
@@ -86,15 +87,13 @@ struct UnsplashAPI {
             let photoID = json["id"] as? String,
             let dateCreatedString = json["created_at"] as? String,
             let dateCreated = dateFormatter.date(from: dateCreatedString),
-            let urlsDictionary = json["urls"] as? [String: String],
-            let urlThumbString = urlsDictionary["thumb"],
-            let urlThumb = URL(string: urlThumbString),
-            let urlFullString = urlsDictionary["regular"],
-            let urlFull = URL(string: urlFullString) else {
+            let imageUrlsDictionary = json["urls"] as? [String: String],
+            let imageUrlString = imageUrlsDictionary["small"],
+            let imageUrl = URL(string: imageUrlString) else {
                 return nil
         }
         
-        //title sometimes returns null
+        // Title sometimes returns null
         var title = ""
         if let _title = json["description"] as? String {
             title = _title
@@ -104,7 +103,6 @@ struct UnsplashAPI {
                      title: title,
                      photoID: photoID,
                      dateCreated: dateCreated,
-                     remoteURLThumb: urlThumb,
-                     remoteURLFull: urlFull)
+                     imageURL: imageUrl)
     }
 }

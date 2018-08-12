@@ -13,16 +13,14 @@ class Photo {
     let title: String
     let photoID: String
     let dateCreated: Date
-    let remoteURLThumb: URL
-    let remoteURLFull: URL
+    let imageURL: URL
     
-    init(creator: String, title: String, photoID: String, dateCreated: Date, remoteURLThumb: URL, remoteURLFull: URL) {
+    init(creator: String, title: String, photoID: String, dateCreated: Date, imageURL: URL) {
         self.creator = creator
         self.title = title
         self.photoID = photoID
         self.dateCreated = dateCreated
-        self.remoteURLThumb = remoteURLThumb
-        self.remoteURLFull = remoteURLFull
+        self.imageURL = imageURL
     }
 }
 

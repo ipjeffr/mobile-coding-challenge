@@ -1,8 +1,8 @@
 //
-//  PhotoStore.swift
+//  UnsplashAPIClient.swift
 //  PhotosGrid
 //
-//  Created by Jeffrey Ip on 2018-08-07.
+//  Created by Jeffrey Ip on 2018-08-11.
 //  Copyright © 2018 nil. All rights reserved.
 //
 
@@ -22,24 +22,37 @@ enum PhotosResult {
     case failure(Error)
 }
 
-class PhotoStore {
-    
+typealias TotalPhotos = Int
+
+class UnsplashAPIClient {
     let imageStore = ImageStore()
+    
+    private let totalPhotosKey = "x-total"
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
     }()
     
-    func fetchPhotos(completion: @escaping (PhotosResult) -> Void) {
-        let url = UnsplashAPI.photosURL
+    func fetchPhotos(page: Int, completion: @escaping (PhotosResult, TotalPhotos) -> Void) {
+        
+        let url = UnsplashAPI.photosURL(page: page)
         let request = URLRequest(url: url)
+        
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
             
+            var totalPhotos = 0
+            if let urlResponse = response as? HTTPURLResponse {
+                let headers = urlResponse.allHeaderFields
+                if let totalPhotosString = headers[self.totalPhotosKey] as? String {
+                    totalPhotos = Int(totalPhotosString)!
+                }
+            }
+            
             let result = self.processPhotosRequest(data: data, error: error)
-            OperationQueue.main.addOperation {
-                completion(result)
+            DispatchQueue.main.async {
+                completion(result, totalPhotos)
             }
         }
         task.resume()
@@ -56,13 +69,13 @@ class PhotoStore {
         
         let photoKey = photo.photoID
         if let image = imageStore.image(forKey: photoKey) {
-            OperationQueue.main.addOperation {
+            DispatchQueue.main.async {
                 completion(.success(image))
             }
             return
         }
         
-        let photoURL = photo.remoteURLThumb
+        let photoURL = photo.imageURL
         let request = URLRequest(url: photoURL)
         
         let task = session.dataTask(with: request) {
@@ -74,7 +87,7 @@ class PhotoStore {
                 self.imageStore.setImage(image, forKey: photoKey)
             }
             
-            OperationQueue.main.addOperation {
+            DispatchQueue.main.async {
                 completion(result)
             }
         }

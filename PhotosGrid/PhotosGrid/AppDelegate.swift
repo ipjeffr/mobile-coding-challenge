@@ -5,7 +5,9 @@
 //  Created by Jeffrey Ip on 2018-08-07.
 //  Copyright © 2018 nil. All rights reserved.
 //
-//  I've drawn heavily from 'iOS Programming: the Big Nerd Ranch Guide 6th ed.' Especially ch.20 (Web Services), and ch.21 (Collection Views)
+//  Resources Consulted:
+//  'iOS Programming: the Big Nerd Ranch Guide 6th ed.' Especially ch.20 (Web Services), and ch.21 (Collection Views)
+//  UITableView Infinite Scrolling Tutorial @ https://www.raywenderlich.com/5786-uitableview-infinite-scrolling-tutorial
 
 import UIKit
 
@@ -16,12 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        //dependency injection - app delegate instantiates photosViewController's photo store
-        let rootViewController = window!.rootViewController as! UINavigationController
-        let photosViewController = rootViewController.topViewController as! PhotosViewController
-        photosViewController.store = PhotoStore()
-        
         return true
     }
 
