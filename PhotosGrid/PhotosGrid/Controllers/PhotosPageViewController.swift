@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PhotosPageViewControllerDelegate: class {
-    func scrollToLastViewedCell(at index: Int)
+    func updateSelectedCell(at index: Int)
 }
 
 class PhotosPageViewController: UIPageViewController {
@@ -24,13 +24,7 @@ class PhotosPageViewController: UIPageViewController {
         delegate = self
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if self.isMovingFromParentViewController {
-            self.visibleCellDelegate?.scrollToLastViewedCell(at: currentIndex)
-        }
-    }
-    
+    // MARK: - Setup
     private func setupViewControllers() {
         let viewController = viewPhotoInfoController(currentIndex)
         let viewControllers = [viewController]
@@ -51,6 +45,7 @@ class PhotosPageViewController: UIPageViewController {
     }
 }
 
+// MARK: - Data Source
 extension PhotosPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -78,6 +73,7 @@ extension PhotosPageViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: - Delegate
 extension PhotosPageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed else {
@@ -87,5 +83,6 @@ extension PhotosPageViewController: UIPageViewControllerDelegate {
             return
         }
         currentIndex = index
+        self.visibleCellDelegate?.updateSelectedCell(at: index)
     }
 }

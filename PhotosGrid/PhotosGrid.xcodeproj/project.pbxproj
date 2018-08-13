@@ -10,6 +10,9 @@
 		310AFA0F211D064A001691CE /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310AFA0E211D064A001691CE /* PhotoCollectionViewCell.swift */; };
 		3139FE652120D60C00748630 /* PhotosPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139FE642120D60C00748630 /* PhotosPageViewController.swift */; };
 		3139FE672120EE5D00748630 /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139FE662120EE5D00748630 /* RoundedLabel.swift */; };
+		3139FE6B212164A000748630 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139FE6A212164A000748630 /* TransitionAnimator.swift */; };
+		3139FE6D2121750B00748630 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139FE6C2121750B00748630 /* CloseButton.swift */; };
+		3139FE6F21217AD800748630 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139FE6E21217AD800748630 /* ColorPalette.swift */; };
 		31B2A18C211A63B70060DBD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2A18B211A63B70060DBD2 /* AppDelegate.swift */; };
 		31B2A191211A63B70060DBD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31B2A18F211A63B70060DBD2 /* Main.storyboard */; };
 		31B2A193211A63B80060DBD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31B2A192211A63B80060DBD2 /* Assets.xcassets */; };
@@ -46,6 +49,9 @@
 		310AFA0E211D064A001691CE /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		3139FE642120D60C00748630 /* PhotosPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPageViewController.swift; sourceTree = "<group>"; };
 		3139FE662120EE5D00748630 /* RoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
+		3139FE6A212164A000748630 /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
+		3139FE6C2121750B00748630 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		3139FE6E21217AD800748630 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		31B2A188211A63B70060DBD2 /* PhotosGrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosGrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31B2A18B211A63B70060DBD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31B2A190211A63B70060DBD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +98,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3139FE7021217B1600748630 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				3139FE6E21217AD800748630 /* ColorPalette.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		3139FE7121217B3100748630 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				3139FE6A212164A000748630 /* TransitionAnimator.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		31B2A17F211A63B70060DBD2 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +139,8 @@
 			children = (
 				31B2A18B211A63B70060DBD2 /* AppDelegate.swift */,
 				31B2A194211A63B80060DBD2 /* LaunchScreen.storyboard */,
+				3139FE7121217B3100748630 /* Animation */,
+				3139FE7021217B1600748630 /* Constants */,
 				31D655B4211F889D009B908C /* Controllers */,
 				31D655B6211F8ACD009B908C /* Networking */,
 				31D655B7211F8AFA009B908C /* Resources */,
@@ -160,6 +184,7 @@
 				31B2A18F211A63B70060DBD2 /* Main.storyboard */,
 				310AFA0E211D064A001691CE /* PhotoCollectionViewCell.swift */,
 				3139FE662120EE5D00748630 /* RoundedLabel.swift */,
+				3139FE6C2121750B00748630 /* CloseButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -336,6 +361,9 @@
 				3139FE652120D60C00748630 /* PhotosPageViewController.swift in Sources */,
 				31D655B1211DA8A0009B908C /* ImageStore.swift in Sources */,
 				310AFA0F211D064A001691CE /* PhotoCollectionViewCell.swift in Sources */,
+				3139FE6B212164A000748630 /* TransitionAnimator.swift in Sources */,
+				3139FE6D2121750B00748630 /* CloseButton.swift in Sources */,
+				3139FE6F21217AD800748630 /* ColorPalette.swift in Sources */,
 				31D655BF211FAE3F009B908C /* UnsplashAPIClient.swift in Sources */,
 				3139FE672120EE5D00748630 /* RoundedLabel.swift in Sources */,
 				31B2A1BA211A66300060DBD2 /* PhotosViewController.swift in Sources */,
@@ -517,6 +545,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y2BZHEV555;
 				INFOPLIST_FILE = "$(SRCROOT)/PhotosGrid/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -535,6 +564,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y2BZHEV555;
 				INFOPLIST_FILE = "$(SRCROOT)/PhotosGrid/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

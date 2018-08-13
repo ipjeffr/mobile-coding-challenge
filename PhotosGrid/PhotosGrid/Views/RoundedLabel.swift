@@ -23,7 +23,7 @@ class RoundedLabel: UILabel {
     private func commonInit() {
         self.layer.cornerRadius = 8
         self.layer.masksToBounds = true
-        self.layer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7).cgColor
+        self.layer.backgroundColor = ColorPalette.translucentLightGray.cgColor
         self.font = UIFont(name: "Avenir-Black", size: 16.0)
         self.textColor = .white
         self.adjustsFontSizeToFitWidth = true

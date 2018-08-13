@@ -21,8 +21,10 @@ class PhotoInfoViewController: UIViewController {
         super.viewDidLoad()
         self.setupLabels()
         self.setupImageView()
+        self.setupSwipeDownToClose()
     }
     
+    // MARK: - Setup
     private func setupLabels() {
         creatorLabel.text = "Created by: " + photo.creator
         
@@ -40,5 +42,26 @@ class PhotoInfoViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // MARK: - Close Page
+    private func setupSwipeDownToClose() {
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture(gesture:)))
+        swipeDown.direction = .down
+        self.view.addGestureRecognizer(swipeDown)
+    }
+    
+    @objc private func handleSwipeGesture(gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == UISwipeGestureRecognizerDirection.down {
+            self.actionClose()
+        }
+    }
+    
+    @IBAction func didTapCloseButton(_ sender: CloseButton) {
+        self.actionClose()
+    }
+    
+    private func actionClose() {
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
