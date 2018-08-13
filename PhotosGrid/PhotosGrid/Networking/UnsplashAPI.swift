@@ -19,6 +19,7 @@ enum UnsplashAPIPath: String {
 struct UnsplashAPI {
     private static let baseURLString = "https://api.unsplash.com/"
     private static let apiKey = "b2f3366c4372f8650108b6583ba7459cd6049faf40af36e70e5aa1064760eca5"
+    private static let imageSizeKey = "small" // Other options: "raw", "thumb", "regular", "full"
     
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -27,8 +28,10 @@ struct UnsplashAPI {
     }()
     
     static func photosURL(page: Int) -> URL {
-        let pageParam = ["page": String(page)]
-        return unsplashURL(path: .photos, parameters: pageParam)
+        // Get 30 photos per page (default is 10)
+        let pageParams = ["per_page": "30",
+                          "page": String(page)]
+        return unsplashURL(path: .photos, parameters: pageParams)
     }
     
     private static func unsplashURL(path: UnsplashAPIPath,
@@ -57,6 +60,8 @@ struct UnsplashAPI {
             let jsonObject = try JSONSerialization.jsonObject(with: data,
                                                               options: [])
             
+            debugPrint(jsonObject)
+            
             guard let photosArray = jsonObject as? [[String: Any]] else {
                 // The JSON structure doesn't match our expectations
                 return .failure(UnsplashError.invalidJsonData)
@@ -84,25 +89,18 @@ struct UnsplashAPI {
     private static func photo(fromJSON json: [String: Any]) -> Photo? {
         guard let user = json["user"] as? [String: Any],
             let creator = user["name"] as? String,
-            let photoID = json["id"] as? String,
             let dateCreatedString = json["created_at"] as? String,
             let dateCreated = dateFormatter.date(from: dateCreatedString),
+            let photoID = json["id"] as? String,
             let imageUrlsDictionary = json["urls"] as? [String: String],
-            let imageUrlString = imageUrlsDictionary["small"],
+            let imageUrlString = imageUrlsDictionary[imageSizeKey],
             let imageUrl = URL(string: imageUrlString) else {
                 return nil
         }
         
-        // Title sometimes returns null
-        var title = ""
-        if let _title = json["description"] as? String {
-            title = _title
-        }
-        
         return Photo(creator: creator,
-                     title: title,
-                     photoID: photoID,
                      dateCreated: dateCreated,
+                     photoID: photoID,
                      imageURL: imageUrl)
     }
 }

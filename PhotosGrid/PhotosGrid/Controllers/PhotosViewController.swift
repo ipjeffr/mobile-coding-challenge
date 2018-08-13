@@ -27,15 +27,15 @@ class PhotosViewController: UIViewController {
         collectionView.prefetchDataSource = self
     }
     
+    private let showPhotoSegue = "showPhotoPage"
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showPhoto"?:
-            if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
-                let photo = viewModel.photo(at: selectedIndexPath.item)
-                
-                let destinationVC = segue.destination as! PhotoInfoViewController
-                destinationVC.photo = photo
-                destinationVC.viewModel = viewModel
+        case showPhotoSegue?:
+            if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first,
+                let photosPageVC = segue.destination as? PhotosPageViewController {
+                photosPageVC.photos = viewModel.getPhotos()
+                photosPageVC.currentIndex = selectedIndexPath.item
+                photosPageVC.visibleCellDelegate = self
             }
         default:
             preconditionFailure("Unexpected segue identifier.")
@@ -66,7 +66,6 @@ extension PhotosViewController: UICollectionViewDelegate {
 extension PhotosViewController: PhotosViewModelDelegate {
     
     func photosFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-
         guard let newIndexPathsToReload = newIndexPathsToReload else {
             collectionView.reloadData()
             return
@@ -103,7 +102,7 @@ extension PhotosViewController: UICollectionViewDataSourcePrefetching {
 }
 
 private extension PhotosViewController {
-    //determines if indexPath requested is out of current range
+    // Determines if indexPath requested is out of current range
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
         return indexPath.item >= viewModel.currentCount
     }
@@ -112,5 +111,15 @@ private extension PhotosViewController {
         let indexPathsForVisibleRows = collectionView.indexPathsForVisibleItems 
         let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
         return Array(indexPathsIntersection)
+    }
+}
+
+extension PhotosViewController: PhotosPageViewControllerDelegate {
+    func scrollToLastViewedCell(at index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        let visibleCellIndexPaths = collectionView.indexPathsForVisibleItems
+        if visibleCellIndexPaths.contains(indexPath) == false {
+            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
     }
 }

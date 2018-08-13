@@ -13,20 +13,19 @@ enum ImageResult {
     case failure(Error)
 }
 
-enum PhotoError: Error {
-    case imageCreationError
-}
-
 enum PhotosResult {
     case success([Photo])
     case failure(Error)
+}
+
+enum PhotoError: Error {
+    case imageCreationError
 }
 
 typealias TotalPhotos = Int
 
 class UnsplashAPIClient {
     let imageStore = ImageStore()
-    
     private let totalPhotosKey = "x-total"
     
     private let session: URLSession = {

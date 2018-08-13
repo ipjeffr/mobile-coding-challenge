@@ -39,20 +39,21 @@ final class PhotosViewModel {
         return self.photos.index(of: photo)
     }
     
+    func getPhotos() -> [Photo] {
+        return photos
+    }
+    
     init(delegate: PhotosViewModelDelegate) {
         self.delegate = delegate
     }
     
     func fetchPhotos() {
-        
         guard !isFetchInProgress else {
             return
         }
-        
         isFetchInProgress = true
         
         client.fetchPhotos(page: currentPage) { (result, totalPhotos) -> Void in
-
             switch result {
             case .success(let photos):
                 self.isFetchInProgress = false
@@ -74,7 +75,6 @@ final class PhotosViewModel {
                 self.isFetchInProgress = false
                 self.delegate?.fetchFailed(with: error.localizedDescription)
             }
-            
         }
     }
     
@@ -85,9 +85,7 @@ final class PhotosViewModel {
     }
         
     func fetchImage(for photo: Photo) {
-
         client.fetchImage(for: photo) { (imageResult) -> Void in
-            
             switch imageResult {
             case .success(let image):
                 if let photoIndex = self.index(of: photo) {
@@ -98,7 +96,6 @@ final class PhotosViewModel {
             case .failure(let error):
                 self.delegate?.fetchFailed(with: error.localizedDescription)
             }
-            
         }
     }
 }

@@ -10,16 +10,14 @@ import Foundation
 
 class Photo {
     let creator: String
-    let title: String
-    let photoID: String
     let dateCreated: Date
+    let photoID: String
     let imageURL: URL
     
-    init(creator: String, title: String, photoID: String, dateCreated: Date, imageURL: URL) {
+    init(creator: String, dateCreated: Date, photoID: String, imageURL: URL) {
         self.creator = creator
-        self.title = title
-        self.photoID = photoID
         self.dateCreated = dateCreated
+        self.photoID = photoID
         self.imageURL = imageURL
     }
 }

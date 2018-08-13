@@ -8,6 +8,7 @@
 //  Resources Consulted:
 //  'iOS Programming: the Big Nerd Ranch Guide 6th ed.' Especially ch.20 (Web Services), and ch.21 (Collection Views)
 //  UITableView Infinite Scrolling Tutorial @ https://www.raywenderlich.com/5786-uitableview-infinite-scrolling-tutorial
+//  UIScrollView Getting Started @ https://www.raywenderlich.com/560-uiscrollview-tutorial-getting-started, Especially 'Paging with UIPageViewController' section
 
 import UIKit
 

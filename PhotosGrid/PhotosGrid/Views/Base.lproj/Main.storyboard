@@ -7,10 +7,11 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Photos View Controller-->
+        <!--Photos Grid-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="PhotosViewController" customModule="PhotosGrid" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,7 +21,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aOO-z7-A6P">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="6dn-5n-EOW">
                                     <size key="itemSize" width="90" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -55,7 +56,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="WRA-ir-w9q" id="boJ-g8-Vky"/>
                                             <outlet property="spinner" destination="6Dk-62-CFC" id="Apj-GK-MS2"/>
-                                            <segue destination="lc7-Kh-uoj" kind="show" identifier="showPhoto" id="1gq-x9-3gt"/>
+                                            <segue destination="R3b-z8-wnF" kind="show" identifier="showPhotoPage" id="QcV-Ed-jdW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -70,7 +71,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Lu8-sr-NVc"/>
+                    <navigationItem key="navigationItem" title="Photos Grid" id="Lu8-sr-NVc"/>
                     <connections>
                         <outlet property="collectionView" destination="aOO-z7-A6P" id="Yvt-cz-hUR"/>
                     </connections>
@@ -79,34 +80,64 @@
             </objects>
             <point key="canvasLocation" x="948" y="-592"/>
         </scene>
+        <!--Photos Page View Controller-->
+        <scene sceneID="6HW-tT-26z">
+            <objects>
+                <pageViewController storyboardIdentifier="PhotosPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="R3b-z8-wnF" customClass="PhotosPageViewController" customModule="PhotosGrid" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fHD-mm-Yig" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679" y="-592"/>
+        </scene>
         <!--Photo Info View Controller-->
         <scene sceneID="hfe-Be-hNN">
             <objects>
-                <viewController id="lc7-Kh-uoj" customClass="PhotoInfoViewController" customModule="PhotosGrid" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoInfoViewController" id="lc7-Kh-uoj" customClass="PhotoInfoViewController" customModule="PhotosGrid" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VNQ-SM-KmF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XAS-po-i0B">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="az5-4Z-AHZ">
+                                <rect key="frame" x="44" y="574" width="287" height="49"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kW7-EI-t8J" customClass="RoundedLabel" customModule="PhotosGrid" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="287" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgM-Z6-kVl" customClass="RoundedLabel" customModule="PhotosGrid" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28.5" width="287" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="H9F-zq-dNb" firstAttribute="bottom" secondItem="XAS-po-i0B" secondAttribute="bottom" id="CU7-x3-obf"/>
+                            <constraint firstItem="H9F-zq-dNb" firstAttribute="bottom" secondItem="az5-4Z-AHZ" secondAttribute="bottom" constant="44" id="GhY-O2-gDA"/>
                             <constraint firstItem="H9F-zq-dNb" firstAttribute="trailing" secondItem="XAS-po-i0B" secondAttribute="trailing" id="f3d-sE-Ri6"/>
+                            <constraint firstItem="H9F-zq-dNb" firstAttribute="trailing" secondItem="az5-4Z-AHZ" secondAttribute="trailing" constant="44" id="fj9-Ik-2oV"/>
                             <constraint firstItem="XAS-po-i0B" firstAttribute="top" secondItem="H9F-zq-dNb" secondAttribute="top" id="q3o-Fv-hbn"/>
+                            <constraint firstItem="az5-4Z-AHZ" firstAttribute="leading" secondItem="H9F-zq-dNb" secondAttribute="leading" constant="44" id="vxl-Jn-3Og"/>
                             <constraint firstItem="XAS-po-i0B" firstAttribute="leading" secondItem="H9F-zq-dNb" secondAttribute="leading" id="wzm-Op-w59"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="H9F-zq-dNb"/>
                     </view>
                     <connections>
+                        <outlet property="creatorLabel" destination="kW7-EI-t8J" id="dME-hf-jcl"/>
+                        <outlet property="dateCreatedLabel" destination="hgM-Z6-kVl" id="ajK-hB-FBg"/>
                         <outlet property="imageView" destination="XAS-po-i0B" id="lWx-nk-VqC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5a-Af-FVs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1777" y="-592"/>
+            <point key="canvasLocation" x="1678" y="92"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BB0-h3-HWu">
